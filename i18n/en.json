@@ -4,5 +4,9 @@
 			"Michael Holloway"
 		]
 	},
-	"mdh-desc": "Odds and ends"
+	"mdh-desc": "Odds and ends",
+	"apihelp-query+apimodules-summary": "Get data about registered API modules.",
+	"apihelp-query+apimodules-param-group": "API module groups to collect.",
+	"apihelp-query+apimodules-param-prop": "Properties to collect about each module.",
+	"apihelp-query+apimodules-example": "Retrieve name and examples for all modules in groups 'action' and 'query.'"
 }

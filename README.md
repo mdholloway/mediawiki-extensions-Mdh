@@ -2,6 +2,9 @@
 
 Personal MediaWiki extension for odds and ends that probably aren't destined for official release.
 
+Featuring:
+* **ApiQueryApiModules**: A [Meta](https://www.mediawiki.org/wiki/API:Meta) API module providing data about registered API modules. How meta!
+
 ## Installation
 
 Download to the `extensions` folder and add `wfLoadExtension( 'Mdh' );` to [LocalSettings.php](https://www.mediawiki.org/wiki/Manual:LocalSettings.php).

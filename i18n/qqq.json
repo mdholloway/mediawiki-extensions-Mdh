@@ -4,5 +4,9 @@
 			"Michael Holloway"
 		]
 	},
-	"mdh-desc": "{{desc|name=Mdh|url=https://github.com/mdholloway/mediawiki-extensions-Mdh}}"
+	"mdh-desc": "{{desc|name=Mdh|url=https://github.com/mdholloway/mediawiki-extensions-Mdh}}",
+	"apihelp-query+apimodules-summary": "{{doc-apihelp-summary|apimodules}}",
+	"apihelp-query+apimodules-param-group": "{{doc-apihelp-param|apimodules|group}}",
+	"apihelp-query+apimodules-param-prop": "{{doc-apihelp-param|apimodules|prop}}",
+	"apihelp-query+apimodules-example": "{{doc-apihelp-example|apimodules}}"
 }

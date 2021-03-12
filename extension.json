@@ -13,6 +13,9 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\Mdh\\": "includes/"
 	},
+	"APIMetaModules": {
+		"apimodules":"MediaWiki\\Extension\\Mdh\\ApiQueryApiModules"
+	},
 	"MessagesDirs": {
 		"Mdh": [
 			"i18n"
