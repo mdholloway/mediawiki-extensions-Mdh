@@ -1,0 +1,22 @@
+{
+	"name": "Mdh",
+	"author": [
+		"Michael Holloway"
+	],
+	"url": "https://github.com/mdholloway/mediawiki-extensions-Mdh",
+	"descriptionmsg": "mdh-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.36.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\Mdh\\": "includes/"
+	},
+	"MessagesDirs": {
+		"Mdh": [
+			"i18n"
+		]
+	},
+	"manifest_version": 2
+}
