@@ -3,7 +3,6 @@
 namespace MediaWiki\Extension\Mdh;
 
 use ApiBase;
-use ApiModuleManager;
 use ApiQuery;
 use ApiQueryBase;
 use LogicException;
@@ -29,21 +28,23 @@ class ApiQueryApiModules extends ApiQueryBase {
 	/** @inheritDoc */
 	public function execute() : void {
 		$groups = $this->getParameter( 'group' );
-		$props = $this->getParameter( 'prop' ) ?? [];
+		$props = $this->getParameter( 'prop' );
 
+		$result['groups'] = [];
 		foreach ( $groups as $group ) {
-			$moduleManager = $this->getModuleForGroup( $group )->getModuleManager();
-			$moduleProps = $this->collectModuleProps( $moduleManager, $props );
-			$this->getResult()->addValue( [ 'query', 'apimodules' ], $group, $moduleProps );
+			$result['groups'][] = $this->collectModulePropsForGroup( $group, $props );
 		}
+		$this->getResult()->addValue( 'query', 'apimodules', $result );
 	}
 
 	/** @inheritDoc */
 	protected function getAllowedParams() : array {
 		return [
 			'prop' => [
+				ParamValidator::PARAM_REQUIRED => true,
 				ParamValidator::PARAM_TYPE => [ self::PROP_NAME, self::PROP_EXAMPLES ],
 				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_DEFAULT => self::PROP_NAME,
 			],
 			'group' => [
 				ParamValidator::PARAM_REQUIRED => true,
@@ -62,18 +63,16 @@ class ApiQueryApiModules extends ApiQueryBase {
 	}
 
 	/**
-	 * @param ApiModuleManager $moduleManager
+	 * @param string $group group name
 	 * @param array $props requested properties
 	 * @return array associative array of module data
 	 */
-	private function collectModuleProps( ApiModuleManager $moduleManager, array $props ) : array {
-		$result = [];
+	private function collectModulePropsForGroup( string $group, array $props ) : array {
+		$result['name'] = $group;
+		$moduleManager = $this->getModuleForGroup( $group )->getModuleManager();
 		$moduleNames = $moduleManager->getNames();
 		foreach ( $moduleNames as $moduleName ) {
-			$moduleData = [];
-			if ( in_array( self::PROP_NAME, $props ) ) {
-				$moduleData[self::PROP_NAME] = $moduleName;
-			}
+			$moduleData[self::PROP_NAME] = $moduleName;
 			if ( in_array( self::PROP_EXAMPLES, $props ) ) {
 				$module = $moduleManager->getModule( $moduleName );
 				$examplesMessages = $module->getExamplesMessages();
@@ -85,7 +84,7 @@ class ApiQueryApiModules extends ApiQueryBase {
 					];
 				}
 			}
-			$result[$moduleName] = $moduleData;
+			$result['modules'][] = $moduleData;
 		}
 		return $result;
 	}
